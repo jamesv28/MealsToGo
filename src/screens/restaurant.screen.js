@@ -6,11 +6,11 @@ import styled from "styled-components/native";
 
 const RestaurantView = styled.SafeAreaView`
   flex: 1;
-  margintop: ${StatusBar.currentHeight}px;
+  ${StatusBar.currentHeight && `margin-top: ${StatusBar.currentHeight}px`};
 `;
 
 const InputWrapper = styled.View`
-  padding: 16px;
+  padding: ${(props) => props.theme.space[3]};
 `;
 
 const SearchInput = styled(Searchbar)`
@@ -18,8 +18,8 @@ const SearchInput = styled(Searchbar)`
 `;
 
 const RestaurantContainer = styled.View`
-  background-color: blue;
-  padding: 16px;
+  background-color: ${(props) => props.theme.colors.brand.secondary};
+  padding: ${(props) => props.theme.space[3]};
   flex: 1;
 `;
 
