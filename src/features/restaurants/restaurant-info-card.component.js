@@ -12,7 +12,7 @@ import {
   Section,
   Icon,
   SectionEnd,
-} from "./restaurant-info-styles";
+} from "./restaurant-info-card.styles";
 
 export const RestaurantInfoCard = ({ restaurant = {} }) => {
   const {
