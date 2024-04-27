@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Searchbar } from "react-native-paper";
-import { Text, View, SafeAreaView, StatusBar, StyleSheet } from "react-native";
+import { FlatList, StatusBar, StyleSheet } from "react-native";
+import { Spacer } from "../components/spacer.component";
 import { RestaurantInfoCard } from "../features/restaurants/restaurant-info-card.component";
 import styled from "styled-components/native";
 
@@ -17,12 +18,6 @@ const SearchInput = styled(Searchbar)`
   borderradius: 0;
 `;
 
-const RestaurantContainer = styled.View`
-  background-color: ${(props) => props.theme.colors.brand.secondary};
-  padding: ${(props) => props.theme.space[3]};
-  flex: 1;
-`;
-
 export const RestaurantScreen = () => {
   const [search, setSearch] = useState("");
 
@@ -35,15 +30,25 @@ export const RestaurantScreen = () => {
           value={search}
         />
       </InputWrapper>
-      <RestaurantContainer>
-        <RestaurantInfoCard />
-      </RestaurantContainer>
+      <FlatList
+        data={[
+          { name: 1 },
+          { name: 2 },
+          { name: 3 },
+          { name: 4 },
+          { name: 25 },
+          { name: 6 },
+          { name: 7 },
+          { name: 8 },
+        ]}
+        renderItem={() => (
+          <Spacer position="bottom" size="large">
+            <RestaurantInfoCard />
+          </Spacer>
+        )}
+        keyExtractor={(item) => item.name}
+        contentContainerStyle={{ padding: 16 }}
+      />
     </RestaurantView>
   );
 };
-
-const styles = StyleSheet.create({
-  search: {
-    borderRadius: 0,
-  },
-});
