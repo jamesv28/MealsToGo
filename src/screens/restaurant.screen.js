@@ -18,6 +18,12 @@ const SearchInput = styled(Searchbar)`
   borderradius: 0;
 `;
 
+const RestaurantList = styled(FlatList).attrs({
+  contentContainerStyle: {
+    padding: 16,
+  },
+})``;
+
 export const RestaurantScreen = () => {
   const [search, setSearch] = useState("");
 
@@ -30,7 +36,7 @@ export const RestaurantScreen = () => {
           value={search}
         />
       </InputWrapper>
-      <FlatList
+      <RestaurantList
         data={[
           { name: 1 },
           { name: 2 },
