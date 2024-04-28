@@ -6,6 +6,7 @@ import { RestaurantScreen } from "./src/screens/restaurant.screen";
 import { SettingsScreen } from "./src/screens/settings.screen";
 import { MapsScreen } from "./src/screens/map.screen";
 import { useFonts, Oswald_400Regular } from "@expo-google-fonts/oswald";
+import { Ionicons } from "@expo/vector-icons";
 import {
   useFonts as merriFonts,
   Merriweather_400Regular,
@@ -13,6 +14,20 @@ import {
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 
+const TAB_ICON = {
+  Restaurants: "restaurant",
+  Settings: "settings",
+  Map: "map",
+};
+
+const createScreenOptions = ({ route }) => {
+  const iconName = TAB_ICON[route.name];
+  return {
+    tabBarIcon: ({ size, color }) => (
+      <Ionicons name={iconName} size={size} color={color} />
+    ),
+  };
+};
 export default function App() {
   let [fontsLoaded] = useFonts({
     Oswald_400Regular,
@@ -32,9 +47,15 @@ export default function App() {
     <>
       <ThemeProvider theme={theme}>
         <NavigationContainer>
-          <Tab.Navigator>
+          <Tab.Navigator
+            screenOptions={createScreenOptions}
+            tabBarOptions={{
+              activeTintColor: "#BF40BF",
+              inactiveTintColor: "gray",
+            }}
+          >
             <Tab.Screen name="Restaurants" component={RestaurantScreen} />
-            <Tab.Screen name="Maps" component={MapsScreen} />
+            <Tab.Screen name="Map" component={MapsScreen} />
             <Tab.Screen name="Settings" component={SettingsScreen} />
           </Tab.Navigator>
         </NavigationContainer>
