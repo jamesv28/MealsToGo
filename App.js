@@ -13,7 +13,7 @@ import {
 } from "@expo-google-fonts/merriweather";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
-
+import { restaurantRequest } from "./src/services/restaurant/restaurant.service";
 const TAB_ICON = {
   Restaurants: "restaurant",
   Settings: "settings",
@@ -43,6 +43,7 @@ export default function App() {
 
   const Tab = createBottomTabNavigator();
 
+  console.log("hello");
   return (
     <>
       <ThemeProvider theme={theme}>
