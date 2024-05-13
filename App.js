@@ -13,7 +13,7 @@ import {
 } from "@expo-google-fonts/merriweather";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
-import { restaurantRequest } from "./src/services/restaurant/restaurant.service";
+import { RestaurantProvider } from "./src/services/restaurant/restaurant.context";
 const TAB_ICON = {
   Restaurants: "restaurant",
   Settings: "settings",
@@ -43,23 +43,24 @@ export default function App() {
 
   const Tab = createBottomTabNavigator();
 
-  console.log("hello");
   return (
     <>
       <ThemeProvider theme={theme}>
-        <NavigationContainer>
-          <Tab.Navigator
-            screenOptions={createScreenOptions}
-            tabBarOptions={{
-              activeTintColor: "#BF40BF",
-              inactiveTintColor: "gray",
-            }}
-          >
-            <Tab.Screen name="Restaurants" component={RestaurantScreen} />
-            <Tab.Screen name="Map" component={MapsScreen} />
-            <Tab.Screen name="Settings" component={SettingsScreen} />
-          </Tab.Navigator>
-        </NavigationContainer>
+        <RestaurantProvider>
+          <NavigationContainer>
+            <Tab.Navigator
+              screenOptions={createScreenOptions}
+              tabBarOptions={{
+                activeTintColor: "#BF40BF",
+                inactiveTintColor: "gray",
+              }}
+            >
+              <Tab.Screen name="Restaurants" component={RestaurantScreen} />
+              <Tab.Screen name="Map" component={MapsScreen} />
+              <Tab.Screen name="Settings" component={SettingsScreen} />
+            </Tab.Navigator>
+          </NavigationContainer>
+        </RestaurantProvider>
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
     </>
