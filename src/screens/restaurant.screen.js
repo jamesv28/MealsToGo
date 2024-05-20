@@ -27,8 +27,7 @@ const RestaurantList = styled(FlatList).attrs({
 
 export const RestaurantScreen = () => {
   const [search, setSearch] = useState("");
-  const restaurantContext = useContext(RestaurantContext);
-  console.log(restaurantContext);
+  const { restaurants, isLoading, error } = useContext(RestaurantContext);
   return (
     <RestaurantView>
       <InputWrapper>
@@ -39,12 +38,14 @@ export const RestaurantScreen = () => {
         />
       </InputWrapper>
       <RestaurantList
-        data={restaurantContext.restaurants}
-        renderItem={() => (
-          <Spacer position="bottom" size="large">
-            <RestaurantInfoCard />
-          </Spacer>
-        )}
+        data={restaurants}
+        renderItem={({ item }) => {
+          return (
+            <Spacer position="bottom" size="large">
+              <RestaurantInfoCard restaurant={item} />
+            </Spacer>
+          );
+        }}
         keyExtractor={(item) => item.name}
         contentContainerStyle={{ padding: 16 }}
       />
