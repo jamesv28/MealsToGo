@@ -9,13 +9,18 @@ export const LocationProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const [keyword, setKeyword] = useState("san francisco");
 
-  const onSearch = () => {
+  const onSearch = (searchKeyword) => {
     setIsLoading(true);
-    locationRequest(keyword)
+    setKeyword(searchKeyword);
+    console.log("search keyword", searchKeyword);
+    if (!searchKeyword.length) return;
+
+    locationRequest(keyword.toLowerCase())
       .then(locationTransform)
       .then((result) => {
         setIsLoading(false);
         setLocation(result);
+        // console.log("result", result);
       })
       .catch((err) => {
         setIsLoading(false);

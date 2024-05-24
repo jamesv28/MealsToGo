@@ -1,10 +1,12 @@
 import React, { useState, useContext } from "react";
-import { Searchbar, ActivityIndicator, Colors } from "react-native-paper";
+import { ActivityIndicator } from "react-native-paper";
 import { FlatList, StatusBar } from "react-native";
 import { Spacer } from "../components/spacer.component";
 import { RestaurantInfoCard } from "../features/restaurants/restaurant-info-card.component";
-import { RestaurantContext } from "../services/restaurant/restaurant.context";
 import styled from "styled-components/native";
+import { Search } from "../components/search/search.component";
+
+import { RestaurantContext } from "../services/restaurant/restaurant.context";
 
 const RestaurantView = styled.SafeAreaView`
   flex: 1;
@@ -21,14 +23,6 @@ const Loading = styled(ActivityIndicator)`
   margin-left: -25px;
 `;
 
-const InputWrapper = styled.View`
-  padding: ${(props) => props.theme.space[3]};
-`;
-
-const SearchInput = styled(Searchbar)`
-  borderradius: 0;
-`;
-
 const RestaurantList = styled(FlatList).attrs({
   contentContainerStyle: {
     padding: 16,
@@ -36,17 +30,10 @@ const RestaurantList = styled(FlatList).attrs({
 })``;
 
 export const RestaurantScreen = () => {
-  const [search, setSearch] = useState("");
   const { restaurants, isLoading, error } = useContext(RestaurantContext);
   return (
     <RestaurantView>
-      <InputWrapper>
-        <SearchInput
-          placeholder="Search"
-          onChangeText={setSearch}
-          value={search}
-        />
-      </InputWrapper>
+      <Search />
       {isLoading && (
         <LoadingView>
           <Loading animating={true} size={50} />
